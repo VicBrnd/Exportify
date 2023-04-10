@@ -24,29 +24,92 @@ class ViewController: NSViewController {
     let dbName = "\(NSHomeDirectory())/Library/Application Support/Google/Chrome/Default/History"
     let tableName = "urls"
     let csvName = "History.csv"
+    let jsonName = "History.json"
+
     
     // Export Button
     @IBAction func exportButtonClicked(_ sender: NSButton) {
         if isGoogleChromeRunning() {
             showErrorAlert()
         } else {
-            let savePanel = NSSavePanel()
-            if #available(macOS 12.0, *) {
-                if let csvType = UTType("public.comma-separated-values-text") {
-                    savePanel.allowedContentTypes = [csvType]
-                }
-            } else {
-                savePanel.allowedFileTypes = ["csv"]
-            }
-            savePanel.nameFieldStringValue = csvName
-
-            // Display the save panel as a sheet attached to the current view's window
-            savePanel.beginSheetModal(for: self.view.window!) { response in
-                if response == .OK, let url = savePanel.url {
-                    self.exportDBToCSV(dbPath: self.dbName, tableName: self.tableName, csvURL: url)
+            let formatAlert = NSAlert()
+            formatAlert.messageText = "Choose Export Format"
+            formatAlert.informativeText = "Please select the format you would like to export the browsing history to:"
+            formatAlert.addButton(withTitle: "CSV")
+            formatAlert.addButton(withTitle: "JSON")
+            formatAlert.addButton(withTitle: "Cancel")
+            
+            formatAlert.beginSheetModal(for: self.view.window!) { (response) in
+                if response == .alertFirstButtonReturn {
+                    self.showSavePanel(defaultFileName: "History.csv", allowedFileTypes: ["csv"], exportFunction: self.exportDBToCSV)
+                } else if response == .alertSecondButtonReturn {
+                    self.showSavePanel(defaultFileName: "History.json", allowedFileTypes: ["json"], exportFunction: self.exportDBToJSON)
                 }
             }
         }
+    }
+
+    func showSavePanel(defaultFileName: String, allowedFileTypes: [String], exportFunction: @escaping (String, String, URL) -> Void) {
+        let savePanel = NSSavePanel()
+        savePanel.allowedFileTypes = allowedFileTypes
+        savePanel.nameFieldStringValue = defaultFileName
+        
+        savePanel.beginSheetModal(for: self.view.window!) { response in
+            if response == .OK, let url = savePanel.url {
+                exportFunction(self.dbName, self.tableName, url)
+            }
+        }
+    }
+
+
+
+
+
+    func exportDBToJSON(dbPath: String, tableName: String, jsonURL: URL) {
+        var db: OpaquePointer?
+        if sqlite3_open(dbPath, &db) == SQLITE_OK {
+            let query = "SELECT strftime('%Y-%m-%d %H:%M:%S', last_visit_time/1000000-11644473600 + 7200, 'unixepoch') AS 'Visit Date', title AS Title, url AS Url, visit_count AS 'Visit Count', typed_count AS 'Typed Count' FROM \(tableName);"
+            
+            var stmt: OpaquePointer?
+            if sqlite3_prepare_v2(db, query, -1, &stmt, nil) == SQLITE_OK {
+                var browsingHistoryData: [[String: Any]] = []
+                
+                while sqlite3_step(stmt) == SQLITE_ROW {
+                    let columns = sqlite3_column_count(stmt)
+                    var rowData: [String: Any] = [:]
+                    for i in 0..<columns {
+                        if let columnName = sqlite3_column_name(stmt, i),
+                           let value = sqlite3_column_text(stmt, i) {
+                            let key = String(cString: columnName)
+                            let str = String(cString: value)
+                            rowData[key] = str
+                        }
+                    }
+                    browsingHistoryData.append(rowData)
+                }
+                
+                do {
+                    // Serialize the browsing history data as JSON
+                    let jsonData = try JSONSerialization.data(withJSONObject: browsingHistoryData, options: .prettyPrinted)
+                    
+                    // Write the JSON data to the specified URL
+                    try jsonData.write(to: jsonURL)
+                    
+                    print("JSON file successfully saved")
+                    showAlert(filePath: jsonURL.path)
+                } catch {
+                    print("Error writing/sorting JSON file: \(error)")
+                }
+            } else {
+                print("Error preparing statement: \(String(cString: sqlite3_errmsg(db)))")
+            }
+            
+            sqlite3_finalize(stmt)
+        } else {
+            print("Error opening database: \(String(cString: sqlite3_errmsg(db)))")
+        }
+        
+        sqlite3_close(db)
     }
 
     // Export Csv
@@ -97,7 +160,7 @@ class ViewController: NSViewController {
                     try FileManager.default.removeItem(at: tempFileURL)
                     
                     print("CSV file successfully saved")
-                    showAlert()
+                    showAlert(filePath: csvURL.path)
                 } catch {
                     print("Error writing/sorting CSV file: \(error)")
                 }
@@ -114,10 +177,10 @@ class ViewController: NSViewController {
     }
     
     // Confetti Alert
-    func showAlert() {
+    func showAlert(filePath: String) {
         let alert = NSAlert()
         alert.messageText = "Exportify"
-        alert.informativeText = "CSV file successfully saved"
+        alert.informativeText = "The file has been successfully saved at:\n\(filePath)"
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
         // Add confetti effect
