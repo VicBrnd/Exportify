@@ -14,7 +14,7 @@ Download from [releases](https://github.com/VicBrnd/Exportify/releases/).
 
 <p float="center" align="center">
 <a target="_blank"><img src="https://www.bernardoniserver.eu//storage/exportify.png" width="400"></a>
-<a target="_blank"><img src="https://www.bernardoniserver.eu//storage/exportify-choose.png" width="400"></a>
+<a target="_blank"><img src="https://www.bernardoniserver.eu//storage/exportify-svgOrjson.png" width="400"></a>
 <a target="_blank"><img src="https://www.bernardoniserver.eu//storage/exportify-location.png" width="400"></a>
 <a target="_blank"><img src="https://www.bernardoniserver.eu//storage/exportify-success.png" width="400"></a>
 </p>
