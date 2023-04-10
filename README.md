@@ -1,8 +1,5 @@
 # 🦕 Exportify
 
-<img src="Shadowsocks.WPF/Resources/ssw128.png" alt="[logo]" width="48"/> Exportify
-=======================
-
 ## Features
 
 - Export Google Chrome browsing history to a CSV file.
@@ -12,10 +9,6 @@
 ## Downloads
 
 Download from [releases](https://github.com/VicBrnd/Exportify/releases/).
-
-## Usage
-
-- 🚀
 
 ## Screenshot
 
