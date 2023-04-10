@@ -1,4 +1,4 @@
-# 🦕 Exportify
+# 💾 Exportify
 
 <p align="center"><a target="_blank"><img src="https://www.bernardoniserver.eu//storage/brnd-readme.svg" width="400"></a></p>
 
