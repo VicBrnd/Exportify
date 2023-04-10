@@ -26,7 +26,6 @@ class ViewController: NSViewController {
     let csvName = "History.csv"
     let jsonName = "History.json"
 
-    
     // Export Button
     @IBAction func exportButtonClicked(_ sender: NSButton) {
         if isGoogleChromeRunning() {
@@ -34,7 +33,7 @@ class ViewController: NSViewController {
         } else {
             let formatAlert = NSAlert()
             formatAlert.messageText = "Choose Export Format"
-            formatAlert.informativeText = "Please select the format you would like to export the browsing history to:"
+            formatAlert.informativeText = "Please select the format you would like to export the browsing history to :"
             formatAlert.addButton(withTitle: "CSV")
             formatAlert.addButton(withTitle: "JSON")
             formatAlert.addButton(withTitle: "Cancel")
@@ -60,10 +59,6 @@ class ViewController: NSViewController {
             }
         }
     }
-
-
-
-
 
     func exportDBToJSON(dbPath: String, tableName: String, jsonURL: URL) {
         var db: OpaquePointer?
@@ -180,7 +175,7 @@ class ViewController: NSViewController {
     func showAlert(filePath: String) {
         let alert = NSAlert()
         alert.messageText = "Exportify"
-        alert.informativeText = "The file has been successfully saved at:\n\(filePath)"
+        alert.informativeText = "The file has been successfully saved at :\n\(filePath)"
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
         // Add confetti effect
