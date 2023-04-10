@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		574D908A29E48AC9009071D1 /* StatusBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574D908929E48AC9009071D1 /* StatusBarManager.swift */; };
 		574DFDCA29E2D5B40015798A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574DFDC929E2D5B40015798A /* AppDelegate.swift */; };
 		574DFDCC29E2D5B40015798A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574DFDCB29E2D5B40015798A /* ViewController.swift */; };
 		574DFDCE29E2D5B40015798A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 574DFDCD29E2D5B40015798A /* Assets.xcassets */; };
@@ -21,17 +22,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		574D908929E48AC9009071D1 /* StatusBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarManager.swift; sourceTree = "<group>"; };
 		574DFDC629E2D5B40015798A /* Exportify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Exportify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		574DFDC929E2D5B40015798A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		574DFDCB29E2D5B40015798A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		574DFDCD29E2D5B40015798A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		574DFDD029E2D5B40015798A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		574DFDD229E2D5B40015798A /* Exportify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Exportify.entitlements; sourceTree = "<group>"; };
-		57979C8B29E3E7450017F6B4 /* ButtonShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonShake.swift; sourceTree = "<group>"; };
+		57979C8B29E3E7450017F6B4 /* ButtonShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ButtonShake.swift; path = Styles/ButtonShake.swift; sourceTree = "<group>"; };
 		57979C9E29E415C80017F6B4 /* ConfettiAlertErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiAlertErrorView.swift; sourceTree = "<group>"; };
 		57E4F69F29E324160058BB64 /* ConfettiAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiAlertView.swift; sourceTree = "<group>"; };
-		57E4F6A629E3386A0058BB64 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
-		57E4F6AC29E33C010058BB64 /* CustomWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWindow.swift; sourceTree = "<group>"; };
+		57E4F6A629E3386A0058BB64 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GradientBackgroundView.swift; path = Styles/GradientBackgroundView.swift; sourceTree = "<group>"; };
+		57E4F6AC29E33C010058BB64 /* CustomWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomWindow.swift; path = Styles/CustomWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		574D908829E48ABD009071D1 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				574D908929E48AC9009071D1 /* StatusBarManager.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		574DFDBD29E2D5B30015798A = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +76,7 @@
 		574DFDC829E2D5B40015798A /* Exportify */ = {
 			isa = PBXGroup;
 			children = (
+				574D908829E48ABD009071D1 /* Menu */,
 				57E4F6A529E3384F0058BB64 /* Styles */,
 				574DFDCB29E2D5B40015798A /* ViewController.swift */,
 				574DFDC929E2D5B40015798A /* AppDelegate.swift */,
@@ -171,6 +182,7 @@
 				574DFDCA29E2D5B40015798A /* AppDelegate.swift in Sources */,
 				57E4F6A029E324160058BB64 /* ConfettiAlertView.swift in Sources */,
 				57979C9F29E415C80017F6B4 /* ConfettiAlertErrorView.swift in Sources */,
+				574D908A29E48AC9009071D1 /* StatusBarManager.swift in Sources */,
 				57E4F6AD29E33C010058BB64 /* CustomWindow.swift in Sources */,
 				57E4F6A729E3386A0058BB64 /* GradientBackgroundView.swift in Sources */,
 			);

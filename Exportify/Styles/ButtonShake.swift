@@ -34,7 +34,7 @@ class ShakeButton: NSButton {
         
         layer?.cornerRadius = 15
         layer?.backgroundColor = NSColor(red: 0.006, green: 0.455, blue: 0.851, alpha: 1).cgColor
-        font = NSFont.systemFont(ofSize: 17, weight: .medium)
+        font = NSFont.systemFont(ofSize: 16, weight: .ultraLight)
         title = title.uppercased()
         let textColor = NSColor.white
         let attributedTitle = NSMutableAttributedString(string: title)
@@ -63,7 +63,7 @@ class ShakeButton: NSButton {
             NSValue(point: NSPoint(x: 2, y: -2)),
             NSValue(point: NSPoint(x: 0, y: 0))
         ]
-        shakeAnimation.duration = 0.3
+        shakeAnimation.duration = 0.6
         shakeAnimation.repeatCount = .greatestFiniteMagnitude
         layer?.add(shakeAnimation, forKey: "shake")
     }

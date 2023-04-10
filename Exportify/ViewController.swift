@@ -12,6 +12,9 @@ import AppKit
 
 class ViewController: NSViewController {
     
+    let statusBarManager = StatusBarManager()
+
+    
     @IBOutlet weak var exportButton: NSButton! // IBOutlet for the NSButton
 
     // Export Variable
@@ -232,6 +235,8 @@ class ViewController: NSViewController {
     
     // Window Background
     override func viewDidLoad() {
+        statusBarManager.viewController = self
+
         super.viewDidLoad()
     
         // Convert HSLA values to NSColor

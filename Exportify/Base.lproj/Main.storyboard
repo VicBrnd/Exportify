@@ -67,13 +67,13 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Exportify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="727" height="404"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXs-sb-Yww" customClass="ShakeButton" customModule="Exportify" customModuleProvider="target">
-                                <rect key="frame" x="20" y="13" width="440" height="33"/>
+                                <rect key="frame" x="144" y="20" width="440" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="inline" title="EXPORT" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v9T-mH-L9f">
+                                <buttonCell key="cell" type="inline" title="Export" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v9T-mH-L9f">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="systemUltraLight" size="11"/>
                                 </buttonCell>
@@ -83,7 +83,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7n-3x-gNW">
-                                <rect key="frame" x="23" y="52" width="435" height="179"/>
+                                <rect key="frame" x="30" y="163" width="666" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" alignment="center" id="gNM-U0-AQ0">
                                     <font key="font" metaFont="systemUltraLight" size="24"/>
@@ -97,7 +97,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75.5" y="716"/>
         </scene>
     </scenes>
 </document>
