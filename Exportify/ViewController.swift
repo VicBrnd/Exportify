@@ -8,73 +8,48 @@
 import Cocoa
 import SQLite3
 import UniformTypeIdentifiers
-
+import AppKit
 
 class ViewController: NSViewController {
     
+    func isGoogleChromeRunning() -> Bool {
+        let chromeAppIdentifier = "com.google.Chrome"
+        let apps = NSRunningApplication.runningApplications(withBundleIdentifier: chromeAppIdentifier)
+        return !apps.isEmpty
+    }
     
     @IBOutlet weak var exportButton: NSButton! // IBOutlet for the NSButton
 
+    // Export Variable
     let dbName = "\(NSHomeDirectory())/Library/Application Support/Google/Chrome/Default/History"
     let tableName = "urls"
     let csvName = "History.csv"
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Convert HSLA values to NSColor
-        let startColor = NSColor(hue: 18.0/360.0, saturation: 0.76, brightness: 0.85, alpha: 1)
-        let endColor = NSColor(hue: 203.0/360.0, saturation: 0.69, brightness: 0.84, alpha: 1)
-
-        // Add the gradient background view
-        let gradientBackgroundView = GradientBackgroundView(frame: view.bounds,
-                                                            startColor: startColor,
-                                                            endColor: endColor)
-        gradientBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(gradientBackgroundView, positioned: .below, relativeTo: view.subviews.first)
-
-        // Constraints to make the gradient background view fill the entire view
-        NSLayoutConstraint.activate([
-            gradientBackgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-            gradientBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            gradientBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            gradientBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
     
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        
-        if let window = self.view.window {
-            let screenFrame = window.screen?.frame ?? NSScreen.main!.frame
-            let windowFrame = window.frame
-            let x = (screenFrame.width - windowFrame.width) / 2
-            let y = (screenFrame.height - windowFrame.height) / 2
-            window.setFrameOrigin(NSPoint(x: x, y: y))
-        }
-    }
-    
-
+    // Export Button
     @IBAction func exportButtonClicked(_ sender: NSButton) {
-        
-        let savePanel = NSSavePanel()
-        if #available(macOS 12.0, *) {
-            if let csvType = UTType("public.comma-separated-values-text") {
-                savePanel.allowedContentTypes = [csvType]
-            }
+        if isGoogleChromeRunning() {
+            showErrorAlert()
         } else {
-            savePanel.allowedFileTypes = ["csv"]
-        }
-        savePanel.nameFieldStringValue = csvName
+            let savePanel = NSSavePanel()
+            if #available(macOS 12.0, *) {
+                if let csvType = UTType("public.comma-separated-values-text") {
+                    savePanel.allowedContentTypes = [csvType]
+                }
+            } else {
+                savePanel.allowedFileTypes = ["csv"]
+            }
+            savePanel.nameFieldStringValue = csvName
 
-        // Display the save panel as a sheet attached to the current view's window
-        savePanel.beginSheetModal(for: self.view.window!) { response in
-            if response == .OK, let url = savePanel.url {
-                self.exportDBToCSV(dbPath: self.dbName, tableName: self.tableName, csvURL: url)
+            // Display the save panel as a sheet attached to the current view's window
+            savePanel.beginSheetModal(for: self.view.window!) { response in
+                if response == .OK, let url = savePanel.url {
+                    self.exportDBToCSV(dbPath: self.dbName, tableName: self.tableName, csvURL: url)
+                }
             }
         }
     }
 
+    // Export Csv
     func exportDBToCSV(dbPath: String, tableName: String, csvURL: URL) {
         var db: OpaquePointer?
         if sqlite3_open(dbPath, &db) == SQLITE_OK {
@@ -138,13 +113,13 @@ class ViewController: NSViewController {
         sqlite3_close(db)
     }
     
+    // Confetti Alert
     func showAlert() {
         let alert = NSAlert()
         alert.messageText = "Exportify"
         alert.informativeText = "CSV file successfully saved"
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
-
         // Add confetti effect
         if let contentView = alert.window.contentView {
             let confettiView = createConfettiView()
@@ -156,7 +131,7 @@ class ViewController: NSViewController {
                 confettiView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
             ])
         }
-
+        
         alert.beginSheetModal(for: self.view.window!) { _ in }
     }
     
@@ -165,9 +140,77 @@ class ViewController: NSViewController {
         confettiView.translatesAutoresizingMaskIntoConstraints = false
         return confettiView
     }
+    
+    // Confetti Error Alert
+    func showErrorAlert() {
+        let alert = NSAlert()
+        alert.messageText = "Error"
+        alert.informativeText = "Please close Google Chrome before exporting the browsing history."
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "OK")
+        
+        // Add confetti effect
+        let confettiErrorView = createConfettiErrorView()
+        alert.window.contentView?.addSubview(confettiErrorView, positioned: .below, relativeTo: alert.window.contentView)
+        confettiErrorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            confettiErrorView.topAnchor.constraint(equalTo: alert.window.contentView!.topAnchor),
+            confettiErrorView.bottomAnchor.constraint(equalTo: alert.window.contentView!.bottomAnchor),
+            confettiErrorView.leadingAnchor.constraint(equalTo: alert.window.contentView!.leadingAnchor),
+            confettiErrorView.trailingAnchor.constraint(equalTo: alert.window.contentView!.trailingAnchor)
+        ])
+        
+        alert.beginSheetModal(for: self.view.window!, completionHandler: nil)
+    }
+
+    func createConfettiErrorView() -> ConfettiErrorView {
+        let confettiErrorView = ConfettiErrorView()
+        confettiErrorView.translatesAutoresizingMaskIntoConstraints = false
+        return confettiErrorView
+    }
+
+    
+    
+    // Window Background
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        // Convert HSLA values to NSColor
+        let startColor = NSColor(hue: 18.0/360.0, saturation: 0.76, brightness: 0.85, alpha: 1)
+        let endColor = NSColor(hue: 203.0/360.0, saturation: 0.69, brightness: 0.84, alpha: 1)
+
+        // Add the gradient background view
+        let gradientBackgroundView = GradientBackgroundView(frame: view.bounds,
+        startColor: startColor,
+        endColor: endColor)
+        gradientBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(gradientBackgroundView, positioned: .below, relativeTo: view.subviews.first)
+
+        // Constraints to make the gradient background view fill the entire view
+        NSLayoutConstraint.activate([
+            gradientBackgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            gradientBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            gradientBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gradientBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    // Window Position
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        if let window = self.view.window {
+            let screenFrame = window.screen?.frame ?? NSScreen.main!.frame
+            let windowFrame = window.frame
+            let x = (screenFrame.width - windowFrame.width) / 2
+            let y = (screenFrame.height - windowFrame.height) / 2
+            window.setFrameOrigin(NSPoint(x: x, y: y))
+        }
+    }
 
 }
 
+// Window Position
 class MainWindowController: NSWindowController {
     
     override func windowDidLoad() {

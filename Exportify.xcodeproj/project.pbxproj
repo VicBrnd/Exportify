@@ -12,6 +12,7 @@
 		574DFDCE29E2D5B40015798A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 574DFDCD29E2D5B40015798A /* Assets.xcassets */; };
 		574DFDD129E2D5B40015798A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 574DFDCF29E2D5B40015798A /* Main.storyboard */; };
 		57979C8C29E3E7450017F6B4 /* ButtonShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57979C8B29E3E7450017F6B4 /* ButtonShake.swift */; };
+		57979C9F29E415C80017F6B4 /* ConfettiAlertErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57979C9E29E415C80017F6B4 /* ConfettiAlertErrorView.swift */; };
 		57E4F69E29E3214B0058BB64 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 57E4F69D29E3214B0058BB64 /* ConfettiSwiftUI */; };
 		57E4F6A029E324160058BB64 /* ConfettiAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E4F69F29E324160058BB64 /* ConfettiAlertView.swift */; };
 		57E4F6A729E3386A0058BB64 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E4F6A629E3386A0058BB64 /* GradientBackgroundView.swift */; };
@@ -26,6 +27,7 @@
 		574DFDD029E2D5B40015798A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		574DFDD229E2D5B40015798A /* Exportify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Exportify.entitlements; sourceTree = "<group>"; };
 		57979C8B29E3E7450017F6B4 /* ButtonShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonShake.swift; sourceTree = "<group>"; };
+		57979C9E29E415C80017F6B4 /* ConfettiAlertErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiAlertErrorView.swift; sourceTree = "<group>"; };
 		57E4F69F29E324160058BB64 /* ConfettiAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiAlertView.swift; sourceTree = "<group>"; };
 		57E4F6A629E3386A0058BB64 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		57E4F6AC29E33C010058BB64 /* CustomWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWindow.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				57E4F6AC29E33C010058BB64 /* CustomWindow.swift */,
 				57979C8B29E3E7450017F6B4 /* ButtonShake.swift */,
 				57E4F69F29E324160058BB64 /* ConfettiAlertView.swift */,
+				57979C9E29E415C80017F6B4 /* ConfettiAlertErrorView.swift */,
 			);
 			name = Styles;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				574DFDCC29E2D5B40015798A /* ViewController.swift in Sources */,
 				574DFDCA29E2D5B40015798A /* AppDelegate.swift in Sources */,
 				57E4F6A029E324160058BB64 /* ConfettiAlertView.swift in Sources */,
+				57979C9F29E415C80017F6B4 /* ConfettiAlertErrorView.swift in Sources */,
 				57E4F6AD29E33C010058BB64 /* CustomWindow.swift in Sources */,
 				57E4F6A729E3386A0058BB64 /* GradientBackgroundView.swift in Sources */,
 			);
