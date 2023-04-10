@@ -12,12 +12,6 @@ import AppKit
 
 class ViewController: NSViewController {
     
-    func isGoogleChromeRunning() -> Bool {
-        let chromeAppIdentifier = "com.google.Chrome"
-        let apps = NSRunningApplication.runningApplications(withBundleIdentifier: chromeAppIdentifier)
-        return !apps.isEmpty
-    }
-    
     @IBOutlet weak var exportButton: NSButton! // IBOutlet for the NSButton
 
     // Export Variable
@@ -48,18 +42,7 @@ class ViewController: NSViewController {
         }
     }
 
-    func showSavePanel(defaultFileName: String, allowedFileTypes: [String], exportFunction: @escaping (String, String, URL) -> Void) {
-        let savePanel = NSSavePanel()
-        savePanel.allowedFileTypes = allowedFileTypes
-        savePanel.nameFieldStringValue = defaultFileName
-        
-        savePanel.beginSheetModal(for: self.view.window!) { response in
-            if response == .OK, let url = savePanel.url {
-                exportFunction(self.dbName, self.tableName, url)
-            }
-        }
-    }
-
+    // Export Json
     func exportDBToJSON(dbPath: String, tableName: String, jsonURL: URL) {
         var db: OpaquePointer?
         if sqlite3_open(dbPath, &db) == SQLITE_OK {
@@ -171,6 +154,26 @@ class ViewController: NSViewController {
         sqlite3_close(db)
     }
     
+    // Google Verify
+    func isGoogleChromeRunning() -> Bool {
+        let chromeAppIdentifier = "com.google.Chrome"
+        let apps = NSRunningApplication.runningApplications(withBundleIdentifier: chromeAppIdentifier)
+        return !apps.isEmpty
+    }
+    
+    // Export Save
+    func showSavePanel(defaultFileName: String, allowedFileTypes: [String], exportFunction: @escaping (String, String, URL) -> Void) {
+        let savePanel = NSSavePanel()
+        savePanel.allowedFileTypes = allowedFileTypes
+        savePanel.nameFieldStringValue = defaultFileName
+        
+        savePanel.beginSheetModal(for: self.view.window!) { response in
+            if response == .OK, let url = savePanel.url {
+                exportFunction(self.dbName, self.tableName, url)
+            }
+        }
+    }
+    
     // Confetti Alert
     func showAlert(filePath: String) {
         let alert = NSAlert()
@@ -226,8 +229,6 @@ class ViewController: NSViewController {
         confettiErrorView.translatesAutoresizingMaskIntoConstraints = false
         return confettiErrorView
     }
-
-    
     
     // Window Background
     override func viewDidLoad() {
@@ -265,23 +266,4 @@ class ViewController: NSViewController {
             window.setFrameOrigin(NSPoint(x: x, y: y))
         }
     }
-
 }
-
-// Window Position
-class MainWindowController: NSWindowController {
-    
-    override func windowDidLoad() {
-        super.windowDidLoad()
-
-        if let window = self.window {
-            let screenFrame = window.screen?.frame ?? NSScreen.main!.frame
-            let windowFrame = window.frame
-            let x = (screenFrame.width - windowFrame.width) / 2
-            let y = (screenFrame.height - windowFrame.height) / 2
-            window.setFrameOrigin(NSPoint(x: x, y: y))
-        }
-    }
-}
-
-

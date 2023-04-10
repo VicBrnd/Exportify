@@ -11,6 +11,7 @@
 		574DFDCC29E2D5B40015798A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574DFDCB29E2D5B40015798A /* ViewController.swift */; };
 		574DFDCE29E2D5B40015798A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 574DFDCD29E2D5B40015798A /* Assets.xcassets */; };
 		574DFDD129E2D5B40015798A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 574DFDCF29E2D5B40015798A /* Main.storyboard */; };
+		5790918529E44913002A62FE /* NotionSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5790918429E44913002A62FE /* NotionSwift */; };
 		57979C8C29E3E7450017F6B4 /* ButtonShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57979C8B29E3E7450017F6B4 /* ButtonShake.swift */; };
 		57979C9F29E415C80017F6B4 /* ConfettiAlertErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57979C9E29E415C80017F6B4 /* ConfettiAlertErrorView.swift */; };
 		57E4F69E29E3214B0058BB64 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 57E4F69D29E3214B0058BB64 /* ConfettiSwiftUI */; };
@@ -39,6 +40,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57E4F69E29E3214B0058BB64 /* ConfettiSwiftUI in Frameworks */,
+				5790918529E44913002A62FE /* NotionSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +106,7 @@
 			name = Exportify;
 			packageProductDependencies = (
 				57E4F69D29E3214B0058BB64 /* ConfettiSwiftUI */,
+				5790918429E44913002A62FE /* NotionSwift */,
 			);
 			productName = Exportify;
 			productReference = 574DFDC629E2D5B40015798A /* Exportify.app */;
@@ -135,6 +138,7 @@
 			mainGroup = 574DFDBD29E2D5B30015798A;
 			packageReferences = (
 				57E4F69C29E3214B0058BB64 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+				5790918329E44913002A62FE /* XCRemoteSwiftPackageReference "NotionSwift" */,
 			);
 			productRefGroup = 574DFDC729E2D5B40015798A /* Products */;
 			projectDirPath = "";
@@ -385,6 +389,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5790918329E44913002A62FE /* XCRemoteSwiftPackageReference "NotionSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chojnac/NotionSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.0;
+			};
+		};
 		57E4F69C29E3214B0058BB64 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
@@ -396,6 +408,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5790918429E44913002A62FE /* NotionSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5790918329E44913002A62FE /* XCRemoteSwiftPackageReference "NotionSwift" */;
+			productName = NotionSwift;
+		};
 		57E4F69D29E3214B0058BB64 /* ConfettiSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 57E4F69C29E3214B0058BB64 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
